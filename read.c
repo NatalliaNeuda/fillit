@@ -6,7 +6,7 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 22:47:42 by nneuda            #+#    #+#             */
-/*   Updated: 2019/10/27 10:10:19 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/11/01 14:20:56 by nneuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ int		main(int argc, char **argv)
 {
 	int		fd;
 	char	*line;
-    char    *s; 
+    char    *s;
+	int 	i;
 
-
+	i = 0;
 	if (argc == 1)
 		fd = 0;
 	else if (argc == 2)
@@ -31,12 +32,15 @@ int		main(int argc, char **argv)
         if (s == NULL)
 			s = ft_strnew(1);
 		if (line)
+		{
 			line = ft_strjoin(line, "\n");
-		char* tmp = ft_strjoin(s, line);
-		free(s);
-		s = tmp;
+			char *tmp = ft_strjoin(s, line);
+			free(s);
+			s = tmp;
+		}
 	}
 	if (argc == 2)
 		close(fd);
-    printf("%s", s);
+	i = 0;
+	printf("%s", s);
 }

@@ -6,7 +6,7 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 17:22:06 by nneuda            #+#    #+#             */
-/*   Updated: 2019/10/26 22:39:11 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/11/09 15:00:44 by nneuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,18 @@ static void f_def_record(t_def *rec, int *x, int *y, int q)
     }
 }
 
+static void figure_record(t_def *rec, int *x, int *y, int nb)
+{
+    int i;
+    
+    i = 0;
+    while (i < LEN)
+    {
+        rec[nb].x[i] = x[i];
+        rec[nb.y[i] = y[i];
+        i++;
+    }
+}
 static void(t_def *rec)
 {
     f_def_record(rec, int[LEN]{0, 0, 1, 0}, int[LEN]{0, 1, 1, 2}, 0);
