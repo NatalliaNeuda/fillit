@@ -6,7 +6,7 @@
 #    By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/03 12:01:46 by nneuda            #+#    #+#              #
-#    Updated: 2019/12/03 12:07:49 by nneuda           ###   ########.fr        #
+#    Updated: 2019/12/05 23:05:40 by nneuda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = fillit
 SRCS = *.c 
 OBJS = *.o
 HEADER = fillit.h 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -g
 
 LIBFT = LIBFT/
 

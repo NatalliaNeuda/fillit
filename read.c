@@ -6,48 +6,19 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:05:04 by nneuda            #+#    #+#             */
-/*   Updated: 2019/12/03 16:13:23 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/12/10 00:32:54 by nneuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "LIBFT/libft.h"
 #include "fillit.h"
 
-static int ft_cells_count(char *s_input)
+static int	ft_cells_count(char *s_input)
 {
-    int hash;
-    int n_fig;
+	int		i;
 
-    n_fig = 0;
-    hash = 0;
-    while (*s_input)
-    {
-        if (*s_input == '#')
-            hash++;
-        s_input++;
-    }
-    n_fig = hash/LEN;
-        return (n_fig);
-}
-
-void find_hash_coord(char *cell, t_fig *rec, int nn)
-{
-    int i;
-    int j;
-
-    i = 0;
-    j = 0;
-    rec[nn].NAME = nn + 'A';
-    while (cell[i] && j < 4)
-    {
-            if (cell[i] == '#')
-            {
-                rec[nn].x[j] = i % 5;
-                rec[nn].y[j] = i / 5;  
-                j++;
-        }
-        i++;
-    }
+	i = (ft_strlen(s_input) + 1) / 21;
+	return (i);
 }
 
 static char *get_cell(char *s_input)
@@ -63,21 +34,6 @@ static char *get_cell(char *s_input)
         cell = ft_strsub(tmp, i, CELL);
     return (cell);
 }
-/*
-static void ft_read(int ac)
-{
-    int fd;
-    
-    fd = 0;
-    if (ac == 1)
-	 	fd = 0;  
-	if (ac == 2)
-		fd = open(argv[1], O_RDONLY);
-	else
-		ft_putstr("usage: ./a.out sample.txt");
-    get_str(fd);
-   
-}*/
 
 static char *get_str(int argc, char *argv)
 {
@@ -102,51 +58,48 @@ static char *get_str(int argc, char *argv)
 			tmp = ft_strjoin(s, line);
 			free(s);
 			s = tmp;
-		}
+		}        
 	}
     close(fd);
     return (s);
 }
 
+static void operate_str(int n_fig, t_fig *rec, char *s)
+{
+    int name;
+    
+    name = 0;
+    while (name < n_fig && s != NULL)
+    {
+        find_hash_coord(get_cell(s), rec, name);
+        shift_figure(&rec[name]);
+        name++;
+        s += CELL;
+    }
+}
 
 int		main(int argc, char **argv)
 {
     char    *s;
-	int 	i;
-	int 	j;
     int     n;
-    int     nn;
     int n_fig;
     t_fig rec[26];
     t_def f_def[19];
 
-	i = 0;
-	j = 0;
-    nn = 0;
-    n_fig = 0;
-    s = get_str(argc, argv[1]);
-
-    if (check_input(s))
-    {
-        n_fig = ft_cells_count(s); 
-	    n = map_size(n_fig);
-        char map[n][n];
-        create_map(n, map);
+    s = get_str(argc, argv[1]);  
+    if (s != NULL)
+        n_fig = ft_cells_count(s);  
+    if (s != NULL && check_input(s, n_fig))
+    {     
+  	    n = map_size(n_fig);
         create_def_figs(f_def);
-        while (nn < n_fig && s != NULL)
-        {
-            find_hash_coord(get_cell(s), rec, nn);
-            shift_figure2(rec, nn);
-            nn++;
-            s += CELL;
-        }
+        operate_str(n_fig, rec, s);
         if (cmp_fig(rec, f_def, n_fig))
-            increase_map(n, rec, nn - 1);
+            increase_map(n, rec);
         else 
             ft_putstr("error\n");
     }
     else
         ft_putstr("error\n");
-        
     return(0);
 }
