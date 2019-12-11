@@ -6,7 +6,7 @@
 #    By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/03 12:01:46 by nneuda            #+#    #+#              #
-#    Updated: 2019/12/10 22:26:14 by nneuda           ###   ########.fr        #
+#    Updated: 2019/12/11 14:10:25 by nneuda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,10 @@ $(NAME): $(SRCS) $(HEADER)
 
 sanit:
 	gcc $(FLAGS) -o $(NAME) $(SRCS) -I $(HEADER) -L. LIBFT/libft.a $(SANIT) -g
+
+debug:
+	gcc $(FLAGS) -o $(NAME) $(SRCS) -I $(HEADER) -L. LIBFT/libft.a -g
+	lldb $(NAME) -- sample.txt
 
 clean: 
 	/bin/rm -f $(OBJS)
