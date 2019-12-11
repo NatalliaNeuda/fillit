@@ -6,7 +6,7 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:05:04 by nneuda            #+#    #+#             */
-/*   Updated: 2019/12/10 22:33:05 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/12/11 15:19:34 by nneuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,13 @@ static char	*get_str(int argc, char *argv)
 	{
 		if (line)
 		{
+			tmp = line;
 			line = ft_strjoin(line, "\n");
+			free(tmp);
 			tmp = ft_strjoin(s, line);
 			free(s);
 			s = tmp;
+			free(line);
 		}
 	}
 	close(fd);
@@ -85,6 +88,7 @@ int			main(int argc, char **argv)
 	t_fig	rec[26];
 	t_def	f_def[19];
 
+	ft_bzero(&rec, sizeof(rec));
 	s = get_str(argc, argv[1]);
 	if (s != NULL)
 		n_fig = ft_cells_count(s);
@@ -100,5 +104,7 @@ int			main(int argc, char **argv)
 	}
 	else
 		ft_putstr("error\n");
+	// while(1)
+	// ;
 	return (0);
 }
