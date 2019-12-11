@@ -6,7 +6,7 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 20:32:26 by nneuda            #+#    #+#             */
-/*   Updated: 2019/10/27 09:59:50 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/12/10 21:18:26 by nneuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 
 # define MAX_FD 4096
 # define BUFF_SIZE 32
-
 
 typedef struct		s_list
 {

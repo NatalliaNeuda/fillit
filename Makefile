@@ -6,7 +6,7 @@
 #    By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/03 12:01:46 by nneuda            #+#    #+#              #
-#    Updated: 2019/12/05 23:05:40 by nneuda           ###   ########.fr        #
+#    Updated: 2019/12/10 22:26:14 by nneuda           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = fillit
 SRCS = *.c 
 OBJS = *.o
 HEADER = fillit.h 
-FLAGS = -Wall -Wextra -Werror -g
+FLAGS = -Wall -Wextra -Werror 
+SANIT = -fsanitize=address
 
 LIBFT = LIBFT/
 
@@ -23,6 +24,9 @@ all: $(NAME)
 $(NAME): $(SRCS) $(HEADER)
 	make -C $(LIBFT)
 	gcc $(FLAGS) -o $(NAME) $(SRCS) -I $(HEADER) -L. LIBFT/libft.a
+
+sanit:
+	gcc $(FLAGS) -o $(NAME) $(SRCS) -I $(HEADER) -L. LIBFT/libft.a $(SANIT) -g
 
 clean: 
 	/bin/rm -f $(OBJS)
