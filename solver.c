@@ -6,7 +6,7 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 14:27:14 by nneuda            #+#    #+#             */
-/*   Updated: 2019/12/11 15:17:16 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/12/11 16:40:28 by nneuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,23 +80,10 @@ static int	backtrack(int n, t_fig *rec, char **map)
 	return (0);
 }
 
-void free_map(int n, char **map)
-{
-	int i;
-
-	i = 0;
-	while (i < n)
-	{
-		ft_strdel(&map[i]);
-		i++;
-	}
-	ft_strdel(map);
-}
-
 void		increase_map(int n, t_fig *rec)
 {
 	int		i;
-	int		j;
+	//int		j;
 	char	**map;
 
 	i = -1;
@@ -106,14 +93,15 @@ void		increase_map(int n, t_fig *rec)
 		map[i] = malloc(n + 1);
 		map[i][n] = '\0';
 	}
-	map[n] = NULL;
-	i = -1;
-	while (++i < n)
-	{
-		j = -1;
-		while (++j < n)
-			map[i][j] = '.';
-	}
+	//map[n] = NULL;
+	create_map(n, &map);
+	// i = -1;
+	// while (++i < n)
+	// {
+	// 	j = -1;
+	// 	while (++j < n)
+	// 		map[i][j] = '.';
+	// }
 	if (!backtrack(n, rec, map))
 	{
 		free_map(n, map);

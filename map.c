@@ -6,7 +6,7 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 00:21:17 by nneuda            #+#    #+#             */
-/*   Updated: 2019/12/10 21:10:52 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/12/11 15:45:47 by nneuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,17 @@ int		corr_name(char c)
 	if (c >= 'A' && c <= 'X')
 		return (1);
 	return (0);
+}
+
+void		free_map(int n, char **map)
+{
+	int		i;
+
+	i = 0;
+	while (i < n)
+	{
+		ft_strdel(&map[i]);
+		i++;
+	}
+	ft_strdel(map);
 }
