@@ -6,20 +6,11 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 14:05:04 by nneuda            #+#    #+#             */
-/*   Updated: 2019/12/11 16:36:09 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/12/11 23:20:25 by hyu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "LIBFT/libft.h"
 #include "fillit.h"
-
-static int	ft_cells_count(char *s_input)
-{
-	int		i;
-
-	i = (ft_strlen(s_input) + 1) / 21;
-	return (i);
-}
 
 static char	*get_cell(char *s_input)
 {
@@ -40,7 +31,6 @@ static char	*get_str(int fd)
 	char	*line;
 	char	*s;
 	char	*tmp;
-	//int		fd;
 
 	s = ft_strnew(0);
 	while (get_next_line(fd, &line) == 1)
@@ -59,61 +49,36 @@ static char	*get_str(int fd)
 	return (s);
 }
 
-static char *fd_open(int argc, char *argv)
+static char	*fd_open(int argc, char *argv)
 {
-	int fd;
-	char *s;
+	int		fd;
+	char	*s;
 
 	if (argc == 1)
 		fd = 0;
 	if (argc == 2)
 		fd = open(argv, O_RDONLY);
 	else
-		ft_putstr("usage: ./fillit sample.txt");
-	s = get_str(fd); 
+	{
+		ft_putstr("usage: ./fillit sample.txt\n");
+		exit(1);
+	}
+	s = get_str(fd);
 	close(fd);
 	return (s);
 }
 
-// static char	*get_str(int argc, char *argv)
-// {
-// 	char	*line;
-// 	char	*s;
-// 	char	*tmp;
-// 	int		fd;
-
-// 	if (argc == 1)
-// 		fd = 0;
-// 	if (argc == 2)
-// 		fd = open(argv, O_RDONLY);
-// 	else
-// 		ft_putstr("usage: ./fillit sample.txt");
-// 	s = ft_strnew(0);
-// 	while (get_next_line(fd, &line) == 1)
-// 	{
-// 		if (line)
-// 		{
-// 			tmp = line;
-// 			line = ft_strjoin(line, "\n");
-// 			free(tmp);
-// 			tmp = ft_strjoin(s, line);
-// 			free(s);
-// 			s = tmp;
-// 			free(line);
-// 		}
-// 	}
-// 	close(fd);
-// 	return (s);
-// }
-
 static void	operate_str(int n_fig, t_fig *rec, char *s)
 {
 	int		name;
+	char	*ptr;
 
 	name = 0;
 	while (name < n_fig && s != NULL)
 	{
-		find_hash_coord(get_cell(s), rec, name);
+		ptr = get_cell(s);
+		find_hash_coord(ptr, rec, name);
+		free(ptr);
 		shift_figure(&rec[name]);
 		name++;
 		s += CELL;
@@ -122,21 +87,22 @@ static void	operate_str(int n_fig, t_fig *rec, char *s)
 
 int			main(int argc, char **argv)
 {
-	char	*s;
+	char	*s[2];
 	int		n;
 	int		n_fig;
 	t_fig	rec[26];
 	t_def	f_def[19];
 
 	ft_bzero(&rec, sizeof(rec));
-	s = fd_open(argc, argv[1]);
-	if (s != NULL)
-		n_fig = ft_cells_count(s);
-	if (s != NULL && check_input(s, n_fig))
+	s[0] = fd_open(argc, argv[1]);
+	s[1] = s[0];
+	if (s[0] != NULL)
+		n_fig = ft_cells_count(s[0]);
+	if (s[0] != NULL && check_input(s[0], n_fig))
 	{
 		n = map_size(n_fig);
 		create_def_figs(f_def);
-		operate_str(n_fig, rec, s);
+		operate_str(n_fig, rec, s[0]);
 		if (cmp_fig(rec, f_def, n_fig))
 			increase_map(n, rec);
 		else
@@ -144,7 +110,6 @@ int			main(int argc, char **argv)
 	}
 	else
 		ft_putstr("error\n");
-	// while(1)
-	// ;
+	ft_strdel(&s[1]);
 	return (0);
 }

@@ -6,31 +6,23 @@
 #    By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/03 12:01:46 by nneuda            #+#    #+#              #
-#    Updated: 2019/12/11 14:41:26 by nneuda           ###   ########.fr        #
+#    Updated: 2019/12/11 23:19:23 by hyu              ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
-SRCS = *.c 
-OBJS = *.o
+SRCS = read.c map.c validation.c solver.c f_def.c
+OBJS = read.o map.o validation.o solver.o f_def.o
 HEADER = fillit.h 
 FLAGS = -Wall -Wextra -Werror 
-SANIT = -fsanitize=address
 
-LIBFT = LIBFT/
+LIBFT = libft/
 
 all: $(NAME)
 	
 $(NAME): $(SRCS) $(HEADER)
 	make -C $(LIBFT)
-	gcc $(FLAGS) -o $(NAME) $(SRCS) -I $(HEADER) -L. LIBFT/libft.a
-
-sanit:
-	gcc $(FLAGS) -o $(NAME) $(SRCS) -I $(HEADER) -L. LIBFT/libft.a $(SANIT) -g
-
-debug:
-	gcc $(FLAGS) -o $(NAME) $(SRCS) -I $(HEADER) -L. LIBFT/libft.a -g
-	lldb $(NAME) -- sample.txt
+	gcc $(FLAGS) -o $(NAME) $(SRCS) -I $(HEADER) -L. libft/libft.a
 
 clean: 
 	/bin/rm -f $(OBJS)

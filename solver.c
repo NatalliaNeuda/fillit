@@ -6,11 +6,10 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/15 14:27:14 by nneuda            #+#    #+#             */
-/*   Updated: 2019/12/11 16:40:28 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/12/11 23:20:08 by hyu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "LIBFT/libft.h"
 #include "fillit.h"
 
 static int	replace(int n, char **map, t_fig *rec, t_step d)
@@ -83,31 +82,25 @@ static int	backtrack(int n, t_fig *rec, char **map)
 void		increase_map(int n, t_fig *rec)
 {
 	int		i;
-	//int		j;
 	char	**map;
 
 	i = -1;
-	map = malloc(sizeof(char*) * n + 1);
+	map = (char**)malloc(sizeof(char*) * n + 1);
+	map[n + 1] = NULL;
 	while (++i < n)
 	{
-		map[i] = malloc(n + 1);
-		map[i][n] = '\0';
+		map[i] = (char*)malloc(sizeof(char) * n + 2);
+		map[i][n + 1] = '\0';
 	}
-	//map[n] = NULL;
 	create_map(n, &map);
-	// i = -1;
-	// while (++i < n)
-	// {
-	// 	j = -1;
-	// 	while (++j < n)
-	// 		map[i][j] = '.';
-	// }
 	if (!backtrack(n, rec, map))
 	{
 		free_map(n, map);
 		increase_map(n + 1, rec);
 	}
 	else
+	{
 		print(n, map);
-	free_map(n, map);
+		free_map(n, map);
+	}
 }

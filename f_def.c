@@ -6,7 +6,7 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/26 17:22:06 by nneuda            #+#    #+#             */
-/*   Updated: 2019/12/10 22:02:09 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/12/11 18:30:46 by nneuda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,12 @@ void		find_hash_coord(char *cell, t_fig *rec, int nn)
 		}
 		i++;
 	}
+}
+
+int			ft_cells_count(char *s_input)
+{
+	int		i;
+
+	i = (ft_strlen(s_input) + 1) / 21;
+	return (i);
 }

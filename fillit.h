@@ -6,7 +6,7 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 15:47:46 by nneuda            #+#    #+#             */
-/*   Updated: 2019/12/10 21:09:29 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/12/11 23:19:48 by hyu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # define Q_POS 19
 # define CELL 21
 
-# include "LIBFT/libft.h"
+# include "libft/libft.h"
 # include <fcntl.h>
 # include <stdio.h>
 
@@ -50,5 +50,7 @@ void			shift_figure2(t_fig *rec, int mm);
 void			print(int n, char **map);
 void			increase_map(int n, t_fig *rec);
 int				corr_name(char c);
+void			free_map(int n, char **map);
+int				ft_cells_count(char *s_input);
 
 #endif

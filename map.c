@@ -6,7 +6,7 @@
 /*   By: nneuda <nneuda@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/10 00:21:17 by nneuda            #+#    #+#             */
-/*   Updated: 2019/12/11 15:45:47 by nneuda           ###   ########.fr       */
+/*   Updated: 2019/12/11 23:04:43 by hyu              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,17 @@ int		corr_name(char c)
 	return (0);
 }
 
-void		free_map(int n, char **map)
+void	free_map(int n, char **map)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (i < n)
 	{
-		ft_strdel(&map[i]);
+		free(map[i]);
+		map[i] = NULL;
 		i++;
 	}
-	ft_strdel(map);
+	free(map);
+	map = NULL;
 }
